@@ -59,6 +59,23 @@ export default function Wallet({ children }) {
     }
   };
 
+  const getAccountDetails= async (accounts) => {
+    const apiUrl = `https://api.minaexplorer.com/balance/${accounts}`;
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    } else {
+      console.log("Error");
+    }
+  };
+
   const handleConnect = async () => {
     let accounts = await window.mina.request({
       method: "mina_requestAccounts",
